@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Eventify | Manage & Book Events</title>'
+<!--Google fonts & simples css reset-->
+<link href="https://fonts.googleapis.com/css2?family=inter;opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+<!--Font Awesome 6(free)-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+  *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+  }
+
+  body
+  {
+font-family:'Inter', sans-serif;
+background: #f4f7fc;
+color: #1a2c3e;
+line-height: 1.5;
+scroll-behavior:smooth;
+  }
+
+  /*container*/
+  .container 
+  {
+  max-width:1300px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+
+  }
+
+  /*header & nav */
+
+  header
+  {
+  background:black;
+  box-shadow: 0 8px 20pxrgba(0,0,0,0.05);
+  position:sticky;
+  top:0;
+  z-index: 100;
+  backdrop-filter:blur(2px);
+  border:2px solid  #289672;
+
+  
+  }
+  
+  .navbar 
+  {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:1rem;
+  }
+.logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #1e6f5c, #289672);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+    }
+    .logo i {
+      color: #1e6f5c;
+      background: none;
+      -webkit-background-clip: unset;
+      background-clip: unset;
+      margin-right: 6px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #2c3e4e;
+      transition: 0.2s;
+    }
+    .nav-links a:hover, .nav-links .active {
+      color: #1e6f5c;
+      border-bottom: 2px solid #1e6f5c;
+      padding-bottom: 4px;
+    }
+    .btn-outline {
+      border: 1.5px solid #1e6f5c;
+      background: transparent;
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      color: #1e6f5c;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .btn-outline:hover {
+      background: #1e6f5c;
+      color: white;
+    }
+    .btn-primary {
+      background: #1e6f5c;
+      border: none;
+      padding: 0.7rem 1.8rem;
+      border-radius: 40px;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .btn-primary:hover {
+      background: #0e5948;
+      transform: translateY(-2px);
+    }
+    .btn-secondary {
+      background: #e9ecef;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    /* hero section */
+    .hero {
+      background: linear-gradient(120deg, #eef9f5, #ffffff);
+      border-radius: 2rem;
+      padding: 2rem 2rem;
+      margin: 1.5rem 0 2rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .hero-text h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #1f3b3a;
+    }
+    .hero-text p {
+      margin: 1rem 0;
+      color: #4a6272;
+      max-width: 500px;
+    }
+    .hero-img img {
+      max-width: 280px;
+      width: 100%;
+      border-radius: 28px;
+      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.15);
+    }
+
+    /* section titles */
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 2rem 0 1.2rem 0;
+      border-left: 6px solid #1e6f5c;
+      padding-left: 1rem;
+    }
+
+    /* event cards grid */
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .event-card {
+      background: white;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: 1px solid #e2edf2;
+    }
+    .event-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 28px -8px rgba(0,0,0,0.15);
+    }
+    .event-img {
+      height: 180px;
+      background-size: cover;
+      background-position: center;
+    }
+    .event-info {
+      padding: 1.2rem;
+    }
+    .event-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+    .event-meta {
+      display: flex;
+      gap: 1rem;
+      color: #5d7b8c;
+      font-size: 0.85rem;
+      margin: 0.6rem 0;
+      flex-wrap: wrap;
+    }
+    .event-meta i {
+      width: 18px;
+      margin-right: 4px;
+    }
+    .event-desc {
+      color: #3e5a6b;
+      margin: 0.8rem 0;
+      font-size: 0.9rem;
+    }
+    .book-btn {
+      background: #eef2f5;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      font-weight: 500;
+      margin-top: 0.6rem;
+      width: 100%;
+      transition: 0.2s;
+    }
+    .book-btn:hover {
+      background: #1e6f5c;
+      color: white;
+    }
+
+    /* booking form panel */
+    .booking-panel {
+      background: white;
+      border-radius: 1.8rem;
+      padding: 1.8rem;
+      margin: 2rem 0;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+      border: 1px solid #dce9ef;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    label {
+      font-weight: 500;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border-radius: 1rem;
+      border: 1px solid #cbdde5;
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+    .flex-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .flex-row > div {
+      flex: 1;
+    }
+
+    /* admin panel */
+    .admin-section {
+      background: #fef9e8;
+      border-radius: 1.8rem;
+      padding: 1.8rem;
+      margin: 2rem 0;
+      border: 1px solid #ffe2b5;
+    }
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .admin-event-list {
+      background: white;
+      border-radius: 1rem;
+      padding: 0.5rem;
+      max-height: 280px;
+      overflow-y: auto;
+    }
+    .admin-event-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem;
+      border-bottom: 1px solid #eee;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .admin-event-actions button {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      margin: 0 5px;
+      cursor: pointer;
+      color: #5f7f8c;
+    }
+    .delete-btn:hover { color: #c44536; }
+    .edit-btn:hover { color: #1e6f5c; }
+    .add-event-form {
+      background: white;
+      padding: 1rem;
+      border-radius: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    /* notification toast */
+    .toast-msg {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #1e2f3c;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 50px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      z-index: 200;
+      font-weight: 500;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #6c8d9c;
+      margin-top: 2rem;
+      border-top: 1px solid #d4e2ea;
+    }
+
+    @media (max-width: 680px) {
+      .container {
+        padding: 0.8rem 1.2rem;
+      }
+      .hero-text h1 {
+        font-size: 1.8rem;
+      }
+      .navbar {
+        flex-direction: column;
+        align-items: start;
+      }
+    }
+
+  }
+
+.hero {
+                padding: 3rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+
+
+.we
+    {
+animation:scroll 10s linear infinite;
+color:black;
+background:whitesmoke;
+    }
+
+
+
+@keyframes scroll
+{
+0%
+{
+transform: translateX(100%);
+}
+
+100%
+{
+transform: translateX(-100%);
+}
+}
+
+
+          
+
+
+
+
+
+    .heroko {
+    position: relative;
+    height: 800px; /* increased height */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    border-radius:10px;
+    padding:20px;
+    background-image: url("fed.png");
+}
+
+/* slideshow background */
+.heroko::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    animation: slideImages 12s infinite;
+    z-index: -2;
+}
+
+/* dark overlay */
+.heroko::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: -1;
+}
+
+/* FIXED container */
+
+
+/* slideshow animation */
+@keyframes slideImages {
+    0% {
+        background-image: url("");
+    }
+    50% {
+        background-image: url(" ");
+    }
+    100% {
+        background-image: url(" ");
+    }
+}
+        
+        footer {
+            background: black;
+            color: black;
+            padding: 3rem 0 1.5rem;
+            
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            color: green;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+        
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+        
+        .contact-info li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color:white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        
+
+</style>
+</head>
+<body>
+  <header>
+    <div class="container navbar"> 
+    <div class="logo">
+    <i class="fas fa-calendar -alt">
+    </i>
+    Eventify
+    </div>
+    <div class="nav-links">
+    <a href="#" class="active" id="navHome">Home</a>
+    <a href="#" id="navEventslink">Events</a>
+    <a href="#" id="navAdminLink">Admin Panel</a>
+    <button class="btn-outline" id="scrollBookingBtn">
+      <iclass="fasfa-ticket-alt"></iclass>
+      Book now
+    </button> 
+    </div>
+    </div>
+    </header>
+
+
+
+<section class="heroko  ">
+
+<h1 class="we">. Discover & book exclusive events- workshops, conferences, music nights.Join the experience!</h1>
+
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+    <main class="container">
+      <div class="hero">
+        <div class="hero-text">
+          <h1>Where moments <br>become memories</h1>
+          <p>Discover & book exclusive events- workshops, conferences, music nights.Join the experience!</p>
+        <button class="btn-primary" id="heroBookBtn">
+        <i class="fasfa-arrow-right"></i>
+        Explore Events
+        </button>
+        </div>
+        <div class="hero-img">
+        <img src="https://picsum.photos/id/106/400/300" alt="event celebration" style="object-fit:cover;">
+        
+        </div>
+      </div>
+      <div id="eventsSection">
+        <div class="section-title">
+          <iclass="fasfa-list-ul"></iclass>
+          Upcoming events
+        </div>
+        <div class="event-grid" id="eventsGrid">
+
+        </div>
+      </div>
+
+      <div id="bookingFormSection">
+      <div class="booking-panel">
+        <h2 style="margin-bottom:1rem;">
+        <i class="fasfa-envelope-open-text"></i>
+        Register For Events
+        </h2>
+        <p style="margin-bottom:1rem; color:#2f6b5c;">Fill the Form- confirmation email will be simulated (check the notification).</p>
+        <form id="bookingForm">
+        <div class="flex-row">
+        <div class="form-group">
+        <label> Fullname *</label>
+        <input type="text" id="regName" placeholder="John Doe" required>
+        </div>
+        <div class="form-group">
+        <label>Email*</label>
+        <input type="email" id="regEmail" placeholder="john@example.com" required>
+        </div>
+        </div>
+        <div class="form-group">
+        <label>Select event*</label>
+        <select id="regEveneySelect" required>
+
+        </select>
+
+        </div>
+        <div class="form-group">
+        <label>Additional request(optional)</label>
+        <texarea rows="2" id="regMessage" placeholder="Dietary, acccessibility..">
+
+        </texarea>
+
+        </div>
+        <button type="submit" class="btn-primary">
+        <iclass="fasfa-paper-plane"></iclass>
+        Complete Booking (simulate email)
+        </button>
+        </form>
+        </div>
+        </div>
+        <div id="adminPanelSection">
+        <div class="admin-section">
+        <div class="admin-header">
+        <h2><i class="fasfa-user-shield"></i>
+        Admin-Event Manager</h2>
+        <small style="color:#6f5e3a;">Create edit or delete events instantly</small>
+        </div>
+        <div id="adminEventListContainer" class="admin-event-list"></div>
+        <div class="add-event-form">
+        <h3 id="adminFormTitle"> <i class="fasfa-plus-circle></i>Add a new event </h3>
+        <form id="adminEventForm">
+        <div class="form-group">
+          <label>Event title</label>
+        <input type="text" id="adminTitle" placeholder="e.g.Jazz Night" required>
+        </div>
+        <div class="form-group">
+       <label>Date &Time</label>
+       <input type="text" id="adminDateTime" placeholder="2025-05-20 19:00; required>
+        </div>
+
+
+    
+        </div>
+        <div class="flex-row">
+        <div class="form-group">
+          <label>location</label>
+          <input type="text" id="adminLocation" placeholder="DowntownHall" required>
+          
+        </div>
+        <div class="form-group">
+        <label>image URL (unsplasg or any)</label>
+        <input type="text" id="adminimag"   placeholder="https://picsum.photos/id/20/400/200">
+        </div>
+        </div>
+        <div class="form-group">
+          <label>Short description </label>
+          <textarea id="adminDesc" rows="2" placeholder="Event Highlights..">
+          </textarea>
+        </div>
+        <input type="hidden" id="editEventId" value="">
+        <button type="submit" class="btn-primary" id="adminSubmitBtn">
+          Create Event
+        </button>
+        <button type="button" id="cancelEditBtn" class="btn-outline" style="margin-left:1rem;">
+          Cancel Edit</button>
+        </form>
+        </div>
+        </div>
+      </div>
+    
+    </main>
+
+
+
+<footer>
+        <div class="cost">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Luxury Auto</h3>
+                    <ul>
+                        <li><a href="carrs.html" class="footer-link" data-section="home">Home</a></li>
+                        <li><a href="#" class="footer-link" data-section="brands">Events</li>
+                        <li><a href="piccs.html" class="footer-link" data-section="cars">AdminPanel/a></li>
+                        <li><a href="#" class="footer-link" data-section="about">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#" class="footer-link" data-section="about">About Us</a></li>
+                        <li><a href="#" class="footer-link" data-section="contact">Contact</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Plot 681 Cadestral Zone C-00 Research & Instituition Area,Jabi Airport Road Bypass, Abuja FCT</li>
+                        <li><i class="fas fa-phone"></i> 07054012106</li>
+                        <li><i class="fas fa-envelope"></i> Group8@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Eventify-Seamless event management  &booking. Simulated email notifications for demo.
+            </div>
+        </div>
+    </footer>
+
+
+
+
+
+
+
+    
+    <script>
+      let events=[
+      {
+      id:"ev1",
+      title:" Urban Gardening Workshop",
+      dateTime:"2025-06-10 10:00AM",
+      location"Green Hub, Downtown",
+      description:" Learn Sustainable gardening, take home your own herbal pot.",
+      imageUrl:"https://picsum.photos/id/15/400/250"$
+      }
+
+      {
+        id:"ev2",
+        title:  "  live Acoustic Night", dateTime:"2025-06-15 07:30 PM",
+        location: "The Rooftop Lounge",
+        description: "Unwind with indie artists and great vibes. Limited seats.",
+        imageUrl:"https://picsum.photos/id/29/400/250"events
+      }
+{
+  id:"ev3";
+  title: "Future Tech Summit",
+  dateTime: "2025-06-22 09:00 AM",
+  location:"Convention Center Hall A",
+  description:"AI, Web3, and networking with industry leaders.",
+  imageUrl:"https://picsum.photos/id/96/400/250"events
+}
+
+{
+  id:"ev4",
+  title:"Wellness Retreat",
+  dateTime:"2025-07-05 08:30 AM",
+  location: "Serenity Park",
+  description:"Yoga, mediation, and mindful workshops.",
+  imageUrl:"https://picsum.photos/id/125/400/250"
+}
+];\
+
+function generateId()
+{
+return 'ev_' + Date.now() +'_' + Math.random().toString(36).substr(2,6);
+
+}
+//Render events grid (public listing)
+
+Function renderEventsGrid()
+{
+const grid=document.getElementsById('eventsGrid');
+if(!grid) return;
+if(events.length===0)
+{
+grid.innerHTML =`iv style="grid-column:1/-1;
+text-align:center;
+padding:2rem;">
+No events yet. Add via admin panel </div>`;
+return;
+}
+grid.innerHTML=events.map(ev=>` <div class="event-card" data-event-id="$ {ev.id}">
+<div class="event-img" style="background-image:url('${ev.imageUrl ||'https://picsum.photos/id/104/400/200'}');">
+</div>
+<div class="event-info">
+<div class="event-title">$ 
+{
+  escapeHtml(ev.title)}}
+  </span>
+  <span>
+<i class="fasfa-map~marker~alt"></i>${
+escapeHtml(ev.location)}
+</span>
+</div>
+
+
+
+  </div>
+<div class="event-desc">${escapeHtml(ev.description.substring(0, 90))}${ev.description.length > 90 ? '…' : ''}</div>
+          <button class="book-btn" data-id="${ev.id}"><i class="fas fa-check-circle"></i> Book this event</button>
+        </div>
+      </div>
+    `).join('');
+
+    // attach booking buttons
+    document.querySelectorAll('.book-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const eventId = btn.getAttribute('data-id');
+        const ev = events.find(e => e.id === eventId);
+        if (ev) {
+          const selectEl = document.getElementById('regEventSelect');
+          if(selectEl) {
+            selectEl.value = eventId;
+            // scroll to booking form
+            document.getElementById('bookingFormSection').scrollIntoView({ behavior: 'smooth' });
+            showToast(📅 Selected: ${ev.title} — fill form to register);
+          }
+        }
+      });
+    });
+  }
+
+  // populate event dropdown in booking form
+  function updateBookingDropdown() {
+    const select = document.getElementById('regEventSelect');
+    if (!select) return;
+    select.innerHTML = '<option value="" disabled>-- Choose an event --</option>' + 
+      events.map(ev => <option value="${ev.id}">${escapeHtml(ev.title)} — ${ev.dateTime}</option>).join('');
+  }
+
+  // Admin panel: render list with edit/delete
+  function renderAdminList() {
+    const container = document.getElementById('adminEventListContainer');
+    if (!container) return;
+    if (events.length === 0) {
+      container.innerHTML = '<div style="padding: 1rem; text-align:center;">No events, click "Create Event" to add.</div>';
+      return;
+    }
+    container.innerHTML = events.map(ev => `
+      <div class="admin-event-item" data-id="${ev.id}">
+        <div><strong>${escapeHtml(ev.title)}</strong><br><small>${ev.dateTime} | ${ev.location}</small></div>
+        <div class="admin-event-actions">
+          <button class="edit-btn" data-id="${ev.id}" title="Edit"><i class="fas fa-edit"></i></button>
+          <button class="delete-btn" data-id="${ev.id}" title="Delete"><i class="fas fa-trash-alt"></i></button>
+        </div>
+      </div>
+    `).join('');
+    // attach delete
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = btn.getAttribute('data-id');
+        deleteEventById(id);
+      });
+    });
+    // attach edit
+    document.querySelectorAll('.edit-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = btn.getAttribute('data-id');
+        populateAdminFormForEdit(id);
+      });
+    });
+  }
+
+  function deleteEventById(id) {
+    events = events.filter(ev => ev.id !== id);
+    if (document.getElementById('editEventId').value === id) {
+      resetAdminForm();
+    }
+    refreshAllUI();
+    showToast("🗑️ Event deleted successfully.");
+  }
+
+  function populateAdminFormForEdit(id) {
+    const ev = events.find(e => e.id === id);
+    if (!ev) return;
+    document.getElementById('adminTitle').value = ev.title;
+    document.getElementById('adminDateTime').value = ev.dateTime;
+    document.getElementById('adminLocation').value = ev.location;
+    document.getElementById('adminDesc').value = ev.description;
+    document.getElementById('adminImage').value = ev.imageUrl || '';
+    document.getElementById('editEventId').value = ev.id;
+    document.getElementById('adminFormTitle').innerHTML = '<i class="fas fa-pen"></i> Edit Event';
+    document.getElementById('adminSubmitBtn').innerHTML = '✏️ Update Event';
+    // scroll
+    document.getElementById('adminPanelSection').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function resetAdminForm() {
+    document.getElementById('adminTitle').value = '';
+    document.getElementById('adminDateTime').value = '';
+    document.getElementById('adminLocation').value = '';
+    document.getElementById('adminDesc').value = '';
+    document.getElementById('adminImage').value = '';
+    document.getElementById('editEventId').value = '';
+    document.getElementById('adminFormTitle').innerHTML = '<i class="fas fa-plus-circle"></i> Add new event';
+    document.getElementById('adminSubmitBtn').innerHTML = '➕ Create Event';
+  }
+
+  function handleAdminSubmit(e) {
+    e.preventDefault();
+    const title = document.getElementById('adminTitle').value.trim();
+    const dateTime = document.getElementById('adminDateTime').value.trim();
+    const location = document.getElementById('adminLocation').value.trim();
+    const description = document.getElementById('adminDesc').value.trim();
+    let imageUrl = document.getElementById('adminImage').value.trim();
+    if (!title || !dateTime || !location || !description) {
+      showToast("❌ Please fill all required fields (title, date, location, description)");
+      return;
+    }
+    if (!imageUrl) imageUrl = "https://picsum.photos/id/26/400/250";
+    const editId = document.getElementById('editEventId').value;
+    if (editId) {
+      // update existing
+      const index = events.findIndex(e => e.id === editId);
+      if (index !== -1) {
+        events[index] = { ...events[index], title, dateTime, location, description, imageUrl };
+        showToast(✏️ Event "${title}" updated.);
+      }
+      resetAdminForm();
+    } else {
+      // create new
+      const newEvent = {
+        id: generateId(),
+        title,
+        dateTime,
+        location,
+        description,
+        imageUrl
+      };
+      events.push(newEvent);
+      showToast(✅ New event "${title}" created!);
+    }
+    refreshAllUI();
+  }
+
+  function refreshAllUI() {
+    renderEventsGrid();
+    updateBookingDropdown();
+    renderAdminList();
+  }
+
+  // Simulated email notification (toast + console)
+  function simulateEmailNotification(userName, userEmail, eventTitle, eventDate) {
+    console.log(📧 SIMULATED EMAIL --- To: ${userEmail} | Subject: Booking Confirmation for ${eventTitle} | Hello ${userName}, you are registered for ${eventTitle} on ${eventDate}. Thank you!);
+    showToast(📧 SIMULATED: Email sent to ${userEmail} (Booking confirmed for ${eventTitle}));
+  }
+
+  // Booking form handler
+  function setupBookingForm() {
+    const form = document.getElementById('bookingForm');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('regName').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const eventId = document.getElementById('regEventSelect').value;
+      const message = document.getElementById('regMessage').value;
+      if (!name || !email || !eventId) {
+        showToast("⚠️ Please fill name, email and select an event.");
+        return;
+      }
+      const selectedEvent = events.find(ev => ev.id === eventId);
+      if (!selectedEvent) {
+        showToast("❌ Event not found. Please select a valid event.");
+        return;
+      }
+      // Simulate email notification (front-end simulation)
+      simulateEmailNotification(name, email, selectedEvent.title, selectedEvent.dateTime);
+      // extra: show custom message
+      showToast(🎉 ${name}, you have successfully registered for "${selectedEvent.title}". A confirmation email was simulated.);
+      // Reset form (keep name optional reset)
+      document.getElementById('regName').value = '';
+      document.getElementById('regEmail').value = '';
+      document.getElementById('regMessage').value = '';
+      document.getElementById('regEventSelect').value = '';
+      // optional: show extra details in console
+      if (message) console.log(Additional request: ${message});
+    });
+  }
+
+  // Toast helper
+  let toastTimeout;
+  function showToast(message) {
+    const existingToast = document.querySelector('.toast-msg');
+    if (existingToast) existingToast.remove();
+    const toast = document.createElement('div');
+    toast.className = 'toast-msg';
+    toast.innerHTML = <i class="fas fa-bell"></i> ${message};
+    document.body.appendChild(toast);
+    if (toastTimeout) clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => {
+      toast.remove();
+    }, 3800);
+  }
+
+  // Navigation / scroll & admin toggle smooth
+  function initNavigation() {
+    const heroBtn = document.getElementById('heroBookBtn');
+    const scrollBtn = document.getElementById('scrollBookingBtn');
+    const navEvents = document.getElementById('navEventsLink');
+    const navAdmin = document.getElementById('navAdminLink');
+    const navHome = document.getElementById('navHome');
+
+    heroBtn?.addEventListener('click', () => document.getElementById('eventsSection').scrollIntoView({ behavior: 'smooth' }));
+    scrollBtn?.addEventListener('click', () => document.getElementById('bookingFormSection').scrollIntoView({ behavior: 'smooth' }));
+    navEvents?.addEventListener('click', (e) => { e.preventDefault(); document.getElementById('eventsSection').scrollIntoView({ behavior: 'smooth' }); });
+    navAdmin?.addEventListener('click', (e) => { e.preventDefault(); document.getElementById('adminPanelSection').scrollIntoView({ behavior: 'smooth' }); });
+    navHome?.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  }
+
+  // Cancel edit button
+  function initCancelEdit() {
+    const cancelBtn = document.getElementById('cancelEditBtn');
+    if (cancelBtn) {
+      cancelBtn.addEventListener('click', () => {
+        resetAdminForm();
+        showToast("Edit cancelled");
+      });
+    }
+  }
+
+  // escape html
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+      return c;
+    });
+  }
+
+  // initialize everything
+  function init() {
+    renderEventsGrid();
+    updateBookingDropdown();
+    renderAdminList();
+    setupBookingForm();
+    initNavigation();
+    initCancelEdit();
+    const adminForm = document.getElementById('adminEventForm');
+    adminForm.addEventListener('submit', handleAdminSubmit);
+  }
+
+  init();
+</script>
+</body>
+</html>
+
